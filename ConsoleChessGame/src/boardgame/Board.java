@@ -71,4 +71,14 @@ public class Board {
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
     }
+
+    /**
+     * Checks if given row and column exists on the board;
+     * @param row
+     * @param column
+     * @return
+     */
+    public boolean positionExists(int row, int column){
+        return row >= 0 && row < this.rows && column >=0 && column < columns;
+    }
 }
