@@ -63,11 +63,12 @@ public class Board {
     }
 
     /**
-     * Places piece at the specified position of the board
+     * Places piece at the specified position of the board and set placed piece position to the position specified
      * @param piece
      * @param position
      */
     public void placePiece(Piece piece, Position position){
         pieces[position.getRow()][position.getColumn()] = piece;
+        piece.position = position;
     }
 }
