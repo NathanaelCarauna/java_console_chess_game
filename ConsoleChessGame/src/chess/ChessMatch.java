@@ -12,6 +12,10 @@ public class ChessMatch {
         board = new Board(8, 8);
     }
 
+    /**
+     * Return all pieces from the match;
+     * @return chessPieces
+     */
     public ChessPiece[][] getPieces(){
         ChessPiece[][] chessPieces = new ChessPiece[board.getRows()][board.getColumns()];
         for(int i = 0; i<board.getRows();i++){
