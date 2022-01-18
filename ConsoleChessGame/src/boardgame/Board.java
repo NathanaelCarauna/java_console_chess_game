@@ -10,6 +10,9 @@ public class Board {
      * @param columns
      */
     public Board(int rows, int columns) {
+        if(rows < 1 || columns < 1){
+            throw new BoardException("Error creating board: there must be at least 1 row and 1 column");
+        }
         this.rows = rows;
         this.columns = columns;
         this.pieces = new Piece[rows][columns];
@@ -23,24 +26,10 @@ public class Board {
     }
 
     /**
-     * @param rows the rows to set
-     */
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    /**
      * @return the columns
      */
     public int getColumns() {
         return columns;
-    }
-
-    /**
-     * @param columns the columns to set
-     */
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 
     /**
