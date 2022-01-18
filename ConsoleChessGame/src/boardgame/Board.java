@@ -43,11 +43,31 @@ public class Board {
         this.columns = columns;
     }
 
+    /**
+     * Return piece at the specified row and column
+     * @param row
+     * @param column
+     * @return
+     */
     public Piece piece(int row, int column){
         return pieces[row][column];
     }
 
+    /**
+     * Return piece at the specified position
+     * @param position
+     * @return
+     */
     public Piece piece(Position position){
         return pieces[position.getRow()][position.getColumn()];
+    }
+
+    /**
+     * Places piece at the specified position of the board
+     * @param piece
+     * @param position
+     */
+    public void placePiece(Piece piece, Position position){
+        pieces[position.getRow()][position.getColumn()] = piece;
     }
 }
