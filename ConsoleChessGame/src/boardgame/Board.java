@@ -90,4 +90,13 @@ public class Board {
     public boolean positionExists(Position position){
         return positionExists(position.getRow(), position.getColumn());
     }
+
+    /**
+     * Checks if there is a piece at the given position
+     * @param position
+     * @return
+     */
+    public boolean thereIsAPiece(Position position){
+        return pieces[position.getRow()][position.getColumn()] != null;
+    }
 }
