@@ -1,6 +1,6 @@
 package boardgame;
 
-public class Piece {
+public abstract class Piece {
     protected Position position;
     private Board board;
 
@@ -19,4 +19,30 @@ public class Piece {
         return board;
     }
 
+    /**
+     * Return a boolean matrix indicating what positions the piece can be moved to
+     * @return boolean matrix
+     */
+    public abstract boolean[][] posibleMoves();
+
+    /**
+     * Return boolean value indicating if the piece can be moved to the specified position
+     * @param position
+     * @return if piece can be moved to position received
+     */
+    public boolean possibleMove(Position position){
+        return posibleMoves()[position.getRow()][position.getColumn()];
+    }
+
+    public boolean isThereAnyPossibleMove(){
+        boolean[][] possibleMovesMatrix = posibleMoves();
+        for(int i = 0; i< possibleMovesMatrix.length; i++){
+            for(int j = 0; j< possibleMovesMatrix.length; j++){
+                if(possibleMovesMatrix[i][j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
