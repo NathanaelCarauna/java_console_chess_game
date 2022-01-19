@@ -1,6 +1,7 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
@@ -29,6 +30,44 @@ public class ChessMatch {
             }
         }
         return chessPieces;
+    }
+
+    /**
+     * Checks and executes movement from source to target position, throwing an error if there isn't a piece on the source
+     * @param sourcePosition
+     * @param targetPosition
+     * @return capturedPiece
+     */
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+        Piece capturedPiece = makeMove(source, target);
+        return (ChessPiece) capturedPiece;
+    }
+
+    /**
+     * Moves the piece to the target position returning captured piece
+     * @param source
+     * @param target
+     * @return capturedPiece
+     */
+    private Piece makeMove(Position source, Position target) {
+        Piece piece = board.removePiece(source);
+        Piece capturedPiece = board.removePiece(target);
+        board.placePiece(piece, target);
+        return capturedPiece;
+    }
+
+    /**
+     * Checks if exists a piece at the specified position
+     * 
+     * @param source
+     */
+    private void validateSourcePosition(Position source) {
+        if (!board.thereIsAPiece(source)) {
+            throw new ChessException("There is no piece on source position");
+        }
     }
 
     /**
