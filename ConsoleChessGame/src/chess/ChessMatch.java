@@ -32,6 +32,11 @@ public class ChessMatch {
         return chessPieces;
     }
 
+    public boolean[][] possibleMoves(ChessPosition chessPosition){
+        Position p = chessPosition.toPosition();
+        return board.piece(p).posibleMoves();
+    }
+
     /**
      * Checks and executes movement from source to target position, throwing an
      * error if there isn't a piece on the source
