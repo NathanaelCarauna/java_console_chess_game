@@ -33,7 +33,9 @@ public class ChessMatch {
     }
 
     /**
-     * Checks and executes movement from source to target position, throwing an error if there isn't a piece on the source
+     * Checks and executes movement from source to target position, throwing an
+     * error if there isn't a piece on the source
+     * 
      * @param sourcePosition
      * @param targetPosition
      * @return capturedPiece
@@ -42,12 +44,14 @@ public class ChessMatch {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
         return (ChessPiece) capturedPiece;
     }
 
     /**
      * Moves the piece to the target position returning captured piece
+     * 
      * @param source
      * @param target
      * @return capturedPiece
@@ -60,6 +64,18 @@ public class ChessMatch {
     }
 
     /**
+     * Validates if target position is a valid target
+     * 
+     * @param source
+     * @param target
+     */
+    private void validateTargetPosition(Position source, Position target) {
+        if (!board.piece(source).possibleMove(target)) {
+            throw new ChessException("The chosen piece can't move to target position");
+        }
+    }
+
+    /**
      * Checks if exists a piece at the specified position
      * 
      * @param source
@@ -68,7 +84,7 @@ public class ChessMatch {
         if (!board.thereIsAPiece(source)) {
             throw new ChessException("There is no piece on source position");
         }
-        if(!board.piece(source).isThereAnyPossibleMove()){
+        if (!board.piece(source).isThereAnyPossibleMove()) {
             throw new ChessException("There is no possible moves for the chosen piece");
         }
     }
