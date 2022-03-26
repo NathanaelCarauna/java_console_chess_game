@@ -18,7 +18,7 @@ public class App {
             try {
 
                 Ui.clearScreen();
-                Ui.printBoard(chessMatch.getPieces());
+                Ui.printMatch(chessMatch);
                 System.out.println();
 
                 System.out.println();

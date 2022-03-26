@@ -46,6 +46,19 @@ public class Ui {
         }
     }
 
+    public static void printMatch(ChessMatch chessMatch) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn : " + chessMatch.getTurn() );
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+
+    }
+
+    /**
+     * Print board on the console
+     * 
+     * @param pieces
+     */
     public static void printBoard(ChessPiece[][] pieces) {
         for (var i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
@@ -58,7 +71,7 @@ public class Ui {
     }
 
     private static void printPiece(ChessPiece chessPiece, boolean canPaintBackground) {
-        if(canPaintBackground){
+        if (canPaintBackground) {
             System.out.print(ANSI_BLUE_BACKGROUND);
         }
         if (chessPiece == null) {
