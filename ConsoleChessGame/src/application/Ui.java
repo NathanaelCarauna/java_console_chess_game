@@ -1,7 +1,11 @@
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -46,10 +50,12 @@ public class Ui {
         }
     }
 
-    public static void printMatch(ChessMatch chessMatch) {
+    public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
         printBoard(chessMatch.getPieces());
         System.out.println();
-        System.out.println("Turn : " + chessMatch.getTurn() );
+        printCapturedPieces(captured);
+        System.out.println();
+        System.out.println("Turn : " + chessMatch.getTurn());
         System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
 
     }
@@ -60,14 +66,25 @@ public class Ui {
      * @param pieces
      */
     public static void printBoard(ChessPiece[][] pieces) {
+        for (int i = 0; i < pieces.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pieces.length; j++) {
+				printPiece(pieces[i][j], false);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+    }
+
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         for (var i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
             for (var j = 0; j < pieces.length; j++) {
-                printPiece(pieces[i][j], false);
+                printPiece(pieces[i][j], possibleMoves[i][j]);
             }
             System.out.println();
         }
-        System.out.print("  a b c d e f g h");
+        System.out.println("  a b c d e f g h");
     }
 
     private static void printPiece(ChessPiece chessPiece, boolean canPaintBackground) {
@@ -86,14 +103,20 @@ public class Ui {
         System.out.print(" ");
     }
 
-    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
-        for (var i = 0; i < pieces.length; i++) {
-            System.out.print((8 - i) + " ");
-            for (var j = 0; j < pieces.length; j++) {
-                printPiece(pieces[i][j], possibleMoves[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.print("  a b c d e f g h");
+    private static void printCapturedPieces(List<ChessPiece> capturedPieces) {
+        List<ChessPiece> white = capturedPieces.stream().filter(x -> x.getColor() == Color.WHITE)
+                .collect(Collectors.toList());
+        List<ChessPiece> black = capturedPieces.stream().filter(x -> x.getColor() == Color.BLACK)
+                .collect(Collectors.toList());        
+        System.out.println("Captured pieces:");
+        System.out.print("White: ");
+        System.out.print(ANSI_WHITE);
+        System.out.println(Arrays.toString(white.toArray()));
+        System.out.print(ANSI_RESET);
+        System.out.print("Black: ");
+        System.out.print(ANSI_YELLOW);
+        System.out.println(Arrays.toString(black.toArray()));
+        System.out.print(ANSI_RESET);
+
     }
 }
