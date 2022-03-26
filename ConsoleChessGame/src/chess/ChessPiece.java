@@ -24,6 +24,13 @@ public abstract class ChessPiece extends Piece {
     }
 
     /**
+     * Returns array position translated to chess position;
+     * @return 
+     */
+    public ChessPosition getChessPosition(){
+        return ChessPosition.fromPosition(position);
+    }
+    /**
      * Checks if there is an opponent at the specified position
      * @param position
      * @return

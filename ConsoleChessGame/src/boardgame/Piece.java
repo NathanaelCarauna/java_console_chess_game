@@ -23,7 +23,7 @@ public abstract class Piece {
      * Return a boolean matrix indicating what positions the piece can be moved to
      * @return boolean matrix
      */
-    public abstract boolean[][] posibleMoves();
+    public abstract boolean[][] possibleMoves();
 
     /**
      * Return boolean value indicating if the piece can be moved to the specified position
@@ -31,11 +31,11 @@ public abstract class Piece {
      * @return if piece can be moved to position received
      */
     public boolean possibleMove(Position position){
-        return posibleMoves()[position.getRow()][position.getColumn()];
+        return possibleMoves()[position.getRow()][position.getColumn()];
     }
 
     public boolean isThereAnyPossibleMove(){
-        boolean[][] possibleMovesMatrix = posibleMoves();
+        boolean[][] possibleMovesMatrix = possibleMoves();
         for(int i = 0; i< possibleMovesMatrix.length; i++){
             for(int j = 0; j< possibleMovesMatrix.length; j++){
                 if(possibleMovesMatrix[i][j]){
