@@ -259,14 +259,14 @@ public class ChessMatch {
                         Piece capturedPiece = makeMove(source, target);
                         boolean isStillInCheck = testCheck(color);
                         undoMove(source, target, capturedPiece);
-                        if(isStillInCheck){
-                            return true;
+                        if(!isStillInCheck){
+                            return false;
                         }                        
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     /**
